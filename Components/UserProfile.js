@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, Animated, Easing } from 'react-native';
 
 class UserProfile extends React.Component {
 
@@ -27,6 +27,13 @@ class UserProfile extends React.Component {
                     <Text style={styles.info}>25, Male</Text>
                     <Text style={styles.info}>France</Text>
                     <Text style={styles.info}>+33 123 456 798</Text>
+                    <TouchableOpacity
+                        style={styles.action_button}
+                        onPress={() => {}}>
+                        <Image
+                            style={styles.action_image}
+                            source={require('../Images/plus_icon.png')} />
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -42,22 +49,21 @@ const styles = StyleSheet.create({
     },
     pictureANDflag_container: {
         flex: 1,
-        //backgroundColor: 'green',
     },
     picture_container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'grey',
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        //borderBottomLeftRadius: 20,
+        //borderBottomRightRadius: 20,
     },
     picture: {
         resizeMode: 'cover',
         flex: 1,
         width: windowWidth,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        //borderBottomLeftRadius: 20,
+        //borderBottomRightRadius: 20,
     },
     flag_container: {
         marginTop: -50,
@@ -93,6 +99,21 @@ const styles = StyleSheet.create({
         marginLeft: 30,
         color: 'grey',
     },
+    action_button: {
+        position: 'absolute',
+        width: 60,
+        height: 60,
+        right: 30,
+        bottom: 30,
+        borderRadius: 30,
+        backgroundColor: '#EF2B8D',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    action_image: {
+        width: 30,
+        height: 30,
+      },
 });
 
 
