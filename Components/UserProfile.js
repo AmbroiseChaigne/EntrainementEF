@@ -3,7 +3,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 //import ABUP_ExpandB from './ABUP_ExpandB';
-import ABUP_allButtons from './ABUP_allButtons';
+//import ABUP_allButtons from './ABUP_allButtons';
+import ActionButtonUP from './ActionButtonUP';
 
 class UserProfile extends React.Component {
 
@@ -25,11 +26,32 @@ class UserProfile extends React.Component {
                     </View>
                 </View>
                 <View style={styles.ID_container}>
-                    <Text style={styles.name}>Alexeb Mousquetaire</Text>
-                    <Text style={styles.info}>25, Male</Text>
-                    <Text style={styles.info}>France</Text>
-                    <Text style={styles.info}>+33 123 456 798</Text>
-                    <ABUP_allButtons/>
+                    <Text style={styles.name}>ALEXEB MOUSQUETAIRE</Text>
+                    <View style={styles.infos_container}>
+                        <Image
+                            style={styles.info_image}
+                            source={require('../Images/age_gender.png')}
+                        />
+                        <Text style={styles.info}>25, Male</Text>
+                    </View>
+                    <View style={styles.infos_container}>
+                        <Image
+                            style={styles.info_image}
+                            source={require('../Images/country.png')}
+                        />
+                        <Text style={styles.info}>France</Text>
+                    </View>
+                    <View style={styles.infos_container}>
+                        <Image
+                            style={styles.info_image}
+                            source={require('../Images/phone.png')}
+                        />
+                        <Text style={styles.info}>+33 123 456 798</Text>
+                    </View>
+                    <View style={styles.bottom_container}>
+                        <Text style={[styles.info, {color: 'white'} ]}>ON VERRA APRES</Text>
+                    </View>
+                    <ActionButtonUP />
                 </View>
             </View>
         );
@@ -84,18 +106,40 @@ const styles = StyleSheet.create({
     },
     name: {
         alignSelf: 'center',
-        marginBottom: 20,
+        marginBottom: 30,
         fontSize: 25,
         fontWeight: 'bold',
         color: 'grey',
+_
+    },
+    infos_container: {
+        flex: 1,
+        flexDirection: 'row',
+        marginBottom: 2,
+        alignItems:'center',
     },
     info: {
-        fontSize: 17,
+        fontSize: 18,
         fontWeight: '300',
-        marginLeft: 30,
+        marginLeft: 10,
         color: 'grey',
+        fontFamily: 'monospace',
+    },
+    info_image: {
+        width: 25,
+        height: 25,
+        marginLeft: 30,
+        tintColor: 'grey',
+        //tintColor: '#E3117A',
+    },
+    bottom_container: {
+        flex: 4,
+        //backgroundColor: 'blue',
     },
 });
 
 
 export default UserProfile;
+
+
+
