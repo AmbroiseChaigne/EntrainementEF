@@ -186,8 +186,8 @@ const styles = StyleSheet.create({
         elevation: 15,
     },
     action_image: {
-        width: 30,
-        height: 30,
+        width: 25,
+        height: 25,
     },
     info_button: {
         width: 30,
