@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
 
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 //import ABUP_ExpandB from './ABUP_ExpandB';
 //import ABUP_allButtons from './ABUP_allButtons';
 import ActionButtonUP from './ActionButtonUP';
@@ -10,53 +12,55 @@ class UserProfile extends React.Component {
 
     render() {
         return (
-            <View style={styles.main_container}>
-                <View style={styles.pictureANDflag_container}>
-                    <View style={styles.picture_container}>
-                        <Image
-                            style={styles.picture}
-                            source={require('../Images/UserPicture_1.jpg')}
-                        />
+            <LinearGradient colors={['#fdfcfb', '#e2d1c3']} style={{ flex: 1 }} useAngle={true} angle={135} angleCenter={{x:0.5,y:0.5}}>
+                <View style={styles.main_container}>
+                    <View style={styles.pictureANDflag_container}>
+                        <View style={styles.picture_container}>
+                            <Image
+                                style={styles.picture}
+                                source={require('../Images/UserPicture_1.jpg')}
+                            />
+                        </View>
+                        <View style={styles.flag_container}>
+                            <Image
+                                style={styles.flag}
+                                source={require('../Images/france2.png')}
+                            />
+                        </View>
                     </View>
-                    <View style={styles.flag_container}>
-                        <Image
-                            style={styles.flag}
-                            source={require('../Images/france2.png')}
-                        />
+                    <View style={styles.ID_container}>
+                        <Text style={styles.name}>ALEXEB</Text>
+                        <Text style={styles.surname}>MOUSQUETAIRE</Text>
+                        <View style={styles.infos_container}>
+                            <Image
+                                style={styles.info_image}
+                                source={require('../Images/age_gender.png')}
+                            />
+                            <Text style={styles.info}>25, Male</Text>
+                        </View>
+                        <View style={styles.infos_container}>
+                            <Image
+                                style={styles.info_image}
+                                source={require('../Images/country.png')}
+                            />
+                            <Text style={styles.info}>France</Text>
+                        </View>
+                        <View style={styles.infos_container}>
+                            <Image
+                                style={styles.info_image}
+                                source={require('../Images/phone.png')}
+                            />
+                            <Text style={styles.info}>+33 123 456 798</Text>
+                        </View>
+                        <ActionButtonUP />
+                        <View style={styles.bottom_container}>
+                            <TouchableOpacity style={styles.contact_button}>
+                                <Text style={styles.title_button}>Contact</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
-                <View style={styles.ID_container}>
-                    <Text style={styles.name}>ALEXEB</Text>
-                    <Text style={styles.surname}>MOUSQUETAIRE</Text>
-                    <View style={styles.infos_container}>
-                        <Image
-                            style={styles.info_image}
-                            source={require('../Images/age_gender.png')}
-                        />
-                        <Text style={styles.info}>25, Male</Text>
-                    </View>
-                    <View style={styles.infos_container}>
-                        <Image
-                            style={styles.info_image}
-                            source={require('../Images/country.png')}
-                        />
-                        <Text style={styles.info}>France</Text>
-                    </View>
-                    <View style={styles.infos_container}>
-                        <Image
-                            style={styles.info_image}
-                            source={require('../Images/phone.png')}
-                        />
-                        <Text style={styles.info}>+33 123 456 798</Text>
-                    </View>
-                    <ActionButtonUP/>
-                    <View style={styles.bottom_container}>
-                        <TouchableOpacity style={styles.contact_button}>
-                            <Text style={styles.title_button}>Contact</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
+            </LinearGradient>
         );
     }
 }
@@ -66,7 +70,7 @@ const windowWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
-        backgroundColor: '#F4F4F4',
+        //backgroundColor: '#F4F4F4',
     },
     pictureANDflag_container: {
         flex: 1,
@@ -130,7 +134,7 @@ const styles = StyleSheet.create({
     infos_container: {
         flex: 1,
         flexDirection: 'row',
-        alignItems:'center',
+        alignItems: 'center',
     },
     info: {
         fontSize: 17,
@@ -161,20 +165,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#E3117A', //'#EF2B8D',
         justifyContent: 'center',
         alignItems: 'center',
-        shadowColor: 'black',
-        shadowOpacity: 1,
-        shadowRadius: 16,
         shadowOffset: {
             width: 0,
-            height: 12,
+            height: 5,
         },
-        elevation: 15,
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        elevation: 10,
     },
     title_button: {
-        fontSize: 22,
+        fontSize: 18,
         fontFamily: 'OpenSans-SemiBold',
         color: '#F4F4F4',
-    }
+    },
 });
 
 

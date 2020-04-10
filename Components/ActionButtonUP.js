@@ -130,7 +130,7 @@ class ActionButtonUP extends React.Component {
                             source={require('../Images/comments.png')} />
                     </View>
                 </Animated.View>
-                <TouchableOpacity style={[styles.action_button, {transform: [{rotate: spinAB}] }, {elevation: 100}]} onPress={this.menuAnimation}>
+                <TouchableOpacity style={[styles.action_button, {transform: [{rotate: spinAB}] }]} onPress={this.menuAnimation}>
                     <Image
                         style={styles.action_image}
                         source={require('../Images/plus_icon.png')} />
@@ -157,14 +157,14 @@ const styles = StyleSheet.create({
         borderRadius: 110,
         position: 'absolute',
         backgroundColor: '#F04098',
-        shadowColor: 'grey',
-        shadowOpacity: 1,
-        shadowRadius: 16.00,
+        shadowColor: '#000',
         shadowOffset: {
             width: 0,
-            height: 12,
+            height: 5,
         },
-        elevation: 100,
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        elevation: 20,
     },
     action_button: {
         width: 60,
@@ -176,14 +176,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#E3117A', //'#EF2B8D',
         justifyContent: 'center',
         alignItems: 'center',
-        shadowColor: 'grey',
-        shadowOpacity: 1,
-        shadowRadius: 16.00,
+        shadowColor: '#000',
         shadowOffset: {
             width: 0,
-            height: 12,
+            height: 5,
         },
-        elevation: 15,
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        elevation: 20,
     },
     action_image: {
         width: 25,
