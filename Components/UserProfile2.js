@@ -2,40 +2,24 @@
 /* eslint-disable prettier/prettier */
 
 import React from 'react';
-import { Image, ScrollView, Text, View, Animated, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import { Image, ScrollView, Text, View, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Rectangle from './Rectangle';
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 class UserProfile2 extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.profilePicture = require('../Images/UserPicture_1.jpg');
-        this.state = {
-            text: '',
-            scrollOffset: new Animated.Value(0),
-        };
-    }
-
     render() {
-        const scrollEvent = Animated.event(
-            [{ nativeEvent: { contentOffset: { y: this.state.scrollOffset } } }],
-            { useNativeDriver: true }
-        );
-        const { scrollOffset } = this.state;
-        const expandedHeaderHeight = 320;
-        const collapsedHeaderHeight = 32;//64
-        const titleHeight = 80;
-        const scrollSpan = expandedHeaderHeight - collapsedHeaderHeight;
-
         return (
             <LinearGradient colors={['#fdfcfb', '#e2d1c3']} style={{ flex: 1 }} useAngle={true} angle={135} angleCenter={{ x: 0.5, y: 0.5 }}>
-                <Animated.ScrollView style={styles.main_container} onScroll={scrollEvent} scrollEventThrottle={1}>
-                    <Animated.View style={{ height: expandedHeaderHeight, overflow: 'hidden', zIndex: 100, transform: [{ translateY: Animated.subtract(scrollOffset, scrollOffset.interpolate({ inputRange: [0, scrollSpan], outputRange: [0, scrollSpan], extrapolate: 'clamp' })) }] }}>
+                <ScrollView style={styles.main_container}>
+                    <View style={styles.pictureANDflag_container}>
                         <View style={styles.picture_container}>
-                            <Animated.Image
+                            <Image
                                 style={styles.picture}
-                                source={this.profilePicture}
+                                source={require('../Images/UserPicture_1.jpg')}
                             />
                         </View>
                         <View style={styles.flag_container}>
@@ -44,18 +28,17 @@ class UserProfile2 extends React.Component {
                                 source={require('../Images/france2.png')}
                             />
                         </View>
-                        <TouchableOpacity style={styles.edit_button}>
+                        <TouchableOpacity style={[styles.edit_button, { right: 0, bottom: 0}]}>
                             <Image
                                 style={styles.edit_image}
                                 source={require('../Images/edit.png')} />
                         </TouchableOpacity>
-                        <Animated.View
-                            style={[StyleSheet.absoluteFill, styles.header_container, { opacity: scrollOffset.interpolate({ inputRange: [scrollSpan / 1.3, scrollSpan], outputRange: [0, 0.98], extrapolate: 'clamp' }) }]} />
-                        <Animated.Text
-                            style={[styles.headerText_container, { transform: [{ translateY: scrollOffset.interpolate({ inputRange: [scrollSpan, scrollSpan + titleHeight], outputRange: [titleHeight, 0], extrapolate: 'clamp' }) }] }]}>
-                            ALEXEB MOUSQUETAIRE
-                        </Animated.Text>
-                    </Animated.View>
+                        <TouchableOpacity style={[styles.edit_button, { right: 60, bottom: 0}]}>
+                            <Image
+                                style={styles.edit_image}
+                                source={require('../Images/favoris_vide.png')} />
+                        </TouchableOpacity>
+                    </View>
 
                     <View style={styles.name_container}>
                         <Text style={styles.name}>ALEXEB</Text>
@@ -130,23 +113,20 @@ class UserProfile2 extends React.Component {
                         <Text style={styles.category_content}>Has been selected for the "casse-couilles" group, seems to be very close to his roomate Fabien GAY, is lovely with a flower in his hair. </Text>
                     </View>
 
-                </Animated.ScrollView>
+                </ScrollView>
             </LinearGradient>
         );
     }
 }
 
-const screenWidth = Dimensions.get('screen').width;
-
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
     },
-    /*pictureANDflag_container: {
-        height: 320,
-        transform: [{ translateY: this.state.scrollOffset }],
-        zIndex: 100,
-    },*/
+   pictureANDflag_container: {
+        //flex: 1,
+        height: windowHeight / 2,
+    },
     picture_container: {
         flex: 1,
         alignItems: 'center',
@@ -158,7 +138,7 @@ const styles = StyleSheet.create({
     picture: {
         resizeMode: 'cover',
         flex: 1,
-        width: screenWidth,
+        width: windowWidth,
         //borderBottomLeftRadius: 20,
         //borderBottomRightRadius: 20,
     },
@@ -183,8 +163,6 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         position: 'absolute',
-        right: 0,
-        bottom: 0,
         justifyContent: 'center',
         alignItems: 'center',
     },
