@@ -60,13 +60,13 @@ class UserProfile2 extends React.Component {
                             />
                             <Text style={styles.info_text}>France</Text>
                         </View>
-                        <View style={styles.infos_container}>
+                        <TouchableOpacity style={styles.infos_container}>
                             <Image
                                 style={styles.info_image}
-                                source={require('../Images/phone.png')}
+                                source={require('../Images/phone2.png')}
                             />
-                            <Text style={styles.info_text}>+33 123 456 798</Text>
-                        </View>
+                            <Text style={[styles.info_text, {fontFamily: 'Amiko-Bold'}]}>+33 123 456 798</Text>
+                        </TouchableOpacity>
                     </View>
 
                     <View style={styles.buttons_container}>
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     infos_container: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 8,
+        marginVertical: 4,
     },
     info_text: {
         fontSize: 17,
