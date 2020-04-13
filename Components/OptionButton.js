@@ -5,96 +5,17 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Image, Animated, Easing } from 'react-native';
 
 
-class ActionButtonUP extends React.Component {
+class OptionButton extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            fadeAnim: new Animated.Value(0),
-            spinAnim: new Animated.Value(0),
-            spinABAnim: new Animated.Value(0),
-            sizeAnim: new Animated.Value(0),
-            visible: 'false',
+
         };
-        this.appearing = this.appearing.bind(this);
-        this.disappearing = this.disappearing.bind(this);
-        this.menuAnimation = this.menuAnimation.bind(this);
-    }
 
-    menuAnimation() {
-        if (this.state.visible === 'false') {
-            this.appearing();
-            this.setState({ visible: 'true' });
-        }
-        else {
-            this.disappearing();
-            this.setState({ visible: 'false' });
-        }
-    }
-
-    appearing() {
-        Animated.parallel([
-            Animated.timing(this.state.spinABAnim, {
-                toValue: 1,
-                duration: 150,
-                easing: Easing.linear,
-                useNativeDriver: true,
-            }),
-            Animated.timing(this.state.spinAnim, {
-                toValue: 1,
-                duration: 150,
-                easing: Easing.linear,
-                useNativeDriver: true,
-            }),
-            /*Animated.spring(this.state.sizeAnim, {
-                toValue: 1,
-                duration: 150,
-                useNativeDriver: true,
-            }),*/
-            Animated.timing(this.state.fadeAnim, {
-                toValue: 1,
-                duration: 150,
-                useNativeDriver: true,
-            }),
-        ]).start();
-    }
-
-    disappearing() {
-        Animated.parallel([
-            Animated.timing(this.state.spinABAnim, {
-                toValue: 0,
-                duration: 150,
-                easing: Easing.linear,
-                useNativeDriver: true,
-            }),
-            Animated.timing(this.state.spinAnim, {
-                toValue: 0,
-                duration: 150,
-                easing: Easing.linear,
-                useNativeDriver: true,
-            }),
-            /*Animated.spring(this.state.sizeAnim, {
-                toValue: 0,
-                duration: 150,
-                useNativeDriver: true,
-            }),*/
-            Animated.timing(this.state.fadeAnim, {
-                toValue: 0,
-                duration: 150,
-                useNativeDriver: true,
-            }),
-        ]).start();
     }
 
     render() {
-        const spin = this.state.spinAnim.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['270deg', '0deg'],
-        });
-        const spinAB = this.state.spinABAnim.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['0deg', '45deg'],
-        });
         return (
             <View style={styles.container}>
                 <Animated.View style={[styles.buttons_container, { opacity: this.state.fadeAnim }, {transform: [{rotate: spin}] }/*, {transform: [{scale: this.state.sizeAnim}] }*/ ]}>
@@ -202,6 +123,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'green',
     },
     info_image: {
         width: 15,
@@ -209,4 +131,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ActionButtonUP;
+export default OptionButton;

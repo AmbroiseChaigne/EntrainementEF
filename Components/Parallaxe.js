@@ -1,33 +1,55 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { Image, ScrollView, Text, View, Animated, Dimensions, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-//import ABUP_ExpandB from './ABUP_ExpandB';
-//import ABUP_allButtons from './ABUP_allButtons';
-import ActionButtonUP from './ActionButtonUP';
 
-class UserProfile extends React.Component {
+class Parallaxe extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            text: '',
+            scrollOffset: new Animated.Value(0),
+        };
+    }
 
     render() {
+        const scrollEvent = Animated.event(
+            [{ nativeEvent: { contentOffset: { y: this.state.scrollOffset } } }],
+            { useNativeDriver: true }
+        );
+        const { scrollOffset } = this.state;
+        const expandedHeaderHeight = 320;
+        const collapsedHeaderHeight = 32;//64
+        const titleHeight = 44;
+        const scrollSpan = expandedHeaderHeight - collapsedHeaderHeight;
+
         return (
-            <LinearGradient colors={['#fdfcfb', '#e2d1c3']} style={{ flex: 1 }} useAngle={true} angle={135} angleCenter={{x:0.5,y:0.5}}>
-                <View style={styles.main_container}>
-                    <View style={styles.pictureANDflag_container}>
-                        <View style={styles.picture_container}>
+            <LinearGradient colors={['#fdfcfb', '#e2d1c3']} style={{ flex: 1 }} useAngle={true} angle={135} angleCenter={{ x: 0.5, y: 0.5 }}>
+                <Animated.ScrollView style={styles.main_container} onScroll={scrollEvent} scrollEventThrottle={1}>
+                    <Animated.View style={{ /*backgroundColor: 'red',*/ height: expandedHeaderHeight, overflow: 'hidden', zIndex: 100, transform: [{translateY: Animated.subtract(scrollOffset,scrollOffset.interpolate({inputRange: [0, scrollSpan], outputRange: [0, scrollSpan], extrapolate: 'clamp'}))}] }}>
+                        <Animated.View style={[styles.picture_container, {transform: [{translateY: scrollOffset.interpolate({inputRange: [0, scrollSpan], outputRange: [0, scrollSpan / 2], extrapolate: 'clamp'})}] }] }>
                             <Image
                                 style={styles.picture}
                                 source={require('../Images/UserPicture_1.jpg')}
                             />
-                        </View>
-                        <View style={styles.flag_container}>
+                        </Animated.View>
+                        <Animated.View style={[styles.flag_container, {transform: [{translateY: scrollOffset.interpolate({inputRange: [0, scrollSpan], outputRange: [0, scrollSpan / 2], extrapolate: 'clamp'})}] }] }>
                             <Image
                                 style={styles.flag}
                                 source={require('../Images/france2.png')}
                             />
-                        </View>
-                    </View>
+                        </Animated.View>
+                    </Animated.View>
+
+
+
+
+
+
+
                     <View style={styles.ID_container}>
                         <Text style={styles.name}>ALEXEB</Text>
                         <Text style={styles.surname}>MOUSQUETAIRE</Text>
@@ -52,18 +74,16 @@ class UserProfile extends React.Component {
                             />
                             <Text style={styles.info}>+33 123 456 798</Text>
                         </View>
-                        <View style={styles.ABcontainer}>
-                            <ActionButtonUP/>
-                        </View>
-                        <View style={styles.bottom_container}>
-                            <TouchableOpacity style={styles.contact_button}>
-                                <Text style={styles.title_button}>Contact</Text>
-                            </TouchableOpacity>
-                        </View>
+                        <Text>{this.state.text}</Text>
                     </View>
-                </View>
+                </Animated.ScrollView>
             </LinearGradient>
         );
+    }
+
+    async componentDidMount() {
+        const res = await fetch('https://loripsum.net/api/plaintext');
+        this.setState({ text: await res.text() });
     }
 }
 
@@ -72,11 +92,12 @@ const windowWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
-        //backgroundColor: '#F4F4F4',
     },
-    pictureANDflag_container: {
-        flex: 1,
-    },
+    /*pictureANDflag_container: {
+        height: 320,
+        transform: [{ translateY: this.state.scrollOffset }],
+        zIndex: 100,
+    },*/
     picture_container: {
         flex: 1,
         alignItems: 'center',
@@ -158,16 +179,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    ABcontainer: {
-        width: 220,
-        height: 220,
-        borderRadius: 110,
-        position: 'absolute',
-        right: -60,
-        bottom: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     contact_button: {
         width: 250,
         height: 50,
@@ -192,8 +203,4 @@ const styles = StyleSheet.create({
     },
 });
 
-
-export default UserProfile;
-
-
-
+export default Parallaxe;
